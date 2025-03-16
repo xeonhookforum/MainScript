@@ -52,7 +52,5 @@ function makePhoneCall(phoneNumber) {
 }
 
 // Przykłady użycia
-getPublicIP();
 checkWebsiteStatus("https://example.com");
-sendSMS("+48123456789", "Witaj, to testowy SMS!");
-makePhoneCall("+48123456789");
+
