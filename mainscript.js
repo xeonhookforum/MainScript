@@ -1,56 +1,15 @@
-// Narzędzia do sieci
+// Importowanie modułów Androida
+import("android.widget.Toast");
+import("android.content.Context");
 
-// Funkcja do pobierania publicznego adresu IP
-function getPublicIP() {
-    import("https").then((https) => {
-        https.get("https://api.ipify.org?format=json", (res) => {
-            let data = "";
-            res.on("data", (chunk) => {
-                data += chunk;
-            });
-            res.on("end", () => {
-                try {
-                    const ipInfo = JSON.parse(data);
-                    console.log("Publiczny adres IP:", ipInfo.ip);
-                } catch (e) {
-                    console.error("Błąd parsowania odpowiedzi:", e);
-                }
-            });
-        }).on("error", (err) => {
-            console.error("Błąd podczas pobierania adresu IP:", err);
-        });
-    }).catch((err) => {
-        console.error("Nie można zaimportować modułu 'https':", err);
-    });
+// Funkcja do wyświetlania powiadomienia
+function showToast(message) {
+    // Pobranie kontekstu aplikacji
+    const context = ActivityThread.currentApplication().getApplicationContext();
+
+    // Tworzenie i wyświetlanie Toast
+    Toast.makeText(context, message, Toast.LENGTH_SHORT).show();
 }
 
-// Funkcja do sprawdzania statusu strony internetowej
-function checkWebsiteStatus(url) {
-    import("https").then((https) => {
-        https.get(url, (res) => {
-            console.log(`Status strony ${url}: ${res.statusCode}`);
-        }).on("error", (err) => {
-            console.error(`Błąd podczas sprawdzania statusu strony ${url}:`, err);
-        });
-    }).catch((err) => {
-        console.error("Nie można zaimportować modułu 'https':", err);
-    });
-}
-
-// Narzędzia do telefonu (symulowane)
-
-// Funkcja do symulacji wysłania SMS
-function sendSMS(phoneNumber, message) {
-    console.log(`Wysyłanie SMS do ${phoneNumber}: ${message}`);
-    // Tutaj można dodać prawdziwą implementację, np. przez API operatora
-}
-
-// Funkcja do symulacji wykonania połączenia telefonicznego
-function makePhoneCall(phoneNumber) {
-    console.log(`Dzwonienie do ${phoneNumber}...`);
-    // Tutaj można dodać prawdziwą implementację, np. przez API operatora
-}
-
-// Przykłady użycia
-checkWebsiteStatus("https://example.com");
-
+// Przykład użycia
+showToast("Witaj, to jest testowe powiadomienie!");
